@@ -19,7 +19,10 @@
 /* Example filter sizes */
 #define DATA_LEN  512*512*16
 #define FILTER_LEN  1
+#define NUM_THREADS  1
 
+omp_set_dynamic(0);
+omp_set_num_threads(NUM_THREADS);
 
 /* Subtract the `struct timeval' values X and Y,
     storing the result in RESULT.
