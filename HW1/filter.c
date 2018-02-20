@@ -21,9 +21,6 @@
 #define FILTER_LEN  1
 #define NUM_THREADS  1
 
-omp_set_dynamic(0);
-omp_set_num_threads(NUM_THREADS);
-
 /* Subtract the `struct timeval' values X and Y,
     storing the result in RESULT.
     Return 1 if the difference is negative, otherwise 0. */
@@ -112,6 +109,9 @@ void serialDataFirst ( int data_len, unsigned int* input_array, unsigned int* ou
 /* Function to apply the filter with the filter list in the outside loop */
 void parallelFilterFirst ( int data_len, unsigned int* input_array, unsigned int* output_array, int filter_len, unsigned int* filter_list )
 {
+  omp_set_dynamic(0);
+  omp_set_num_threads(NUM_THREADS);
+
   /* Variables for timing */
   struct timeval ta, tb, tresult;
 
@@ -143,6 +143,9 @@ void parallelFilterFirst ( int data_len, unsigned int* input_array, unsigned int
 /* Function to apply the filter with the filter list in the outside loop */
 void parallelDataFirst ( int data_len, unsigned int* input_array, unsigned int* output_array, int filter_len, unsigned int* filter_list )
 {
+  omp_set_dynamic(0);
+  omp_set_num_threads(NUM_THREADS);
+
   /* Variables for timing */
   struct timeval ta, tb, tresult;
 
