@@ -258,6 +258,39 @@ void parallelDataFirstDynamic ( int data_len, unsigned int* input_array, unsigne
   printf ("Parallel data first dynamic took %lu seconds and %lu microseconds.  Filter length = %d\n", tresult.tv_sec, tresult.tv_usec, filter_len );
 }
 
+/* Function to apply the filter with the filter list in the outside loop */
+void parallelDataFirstStatic ( int data_len, unsigned int* input_array, unsigned int* output_array, int filter_len, unsigned int* filter_list )
+{
+  omp_set_dynamic(0);
+  omp_set_num_threads(NUM_THREADS);
+
+  /* Variables for timing */
+  struct timeval ta, tb, tresult;
+
+  /* get initial time */
+  gettimeofday ( &ta, NULL );
+
+  /* for all elements in the data */
+#pragma omp parallel for schedule(static, 4)
+  for (int x=0; x<data_len; x++) {
+    /* for all elements in the filter */ 
+    for (int y=0; y<filter_len; y++) { 
+      /* it the data element matches the filter */ 
+      if (input_array[x] == filter_list[y]) {
+        /* include it in the output */
+        output_array[x] = input_array[x];
+      }
+    }
+  }
+
+  /* get initial time */
+  gettimeofday ( &tb, NULL );
+
+  timeval_subtract ( &tresult, &tb, &ta );
+
+  printf ("Parallel data first static took %lu seconds and %lu microseconds.  Filter length = %d\n", tresult.tv_sec, tresult.tv_usec, filter_len );
+}
+
 void checkData ( unsigned int * serialarray, unsigned int * parallelarray )
 {
   for (int i=0; i<DATA_LEN; i++)
@@ -326,6 +359,10 @@ int main( int argc, char** argv )
 //    memset ( output_array, 0, DATA_LEN );
 
     parallelDataFirstDynamic ( DATA_LEN, input_array, output_array, filter_len, filter_list );
+    checkData ( serial_array, output_array );
+    memset ( output_array, 0, DATA_LEN );
+
+    parallelDataFirstStatic ( DATA_LEN, input_array, output_array, filter_len, filter_list );
     checkData ( serial_array, output_array );
     memset ( output_array, 0, DATA_LEN );
   }
