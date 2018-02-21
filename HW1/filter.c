@@ -189,7 +189,7 @@ void parallelDataFirstUnrolled ( int data_len, unsigned int* input_array, unsign
   #pragma omp parallel for
   for (int x=0; x<data_len; x++) {
     /* for all elements in the filter */ 
-    for (int y=0; y<filter_len; y+=4) { 
+    for (int y=0; y<filter_len; y+=8) { 
       /* it the data element matches the filter */ 
       if (input_array[x] == filter_list[y]) {
         /* include it in the output */
@@ -204,6 +204,22 @@ void parallelDataFirstUnrolled ( int data_len, unsigned int* input_array, unsign
         output_array[x] = input_array[x];
       }
       if (input_array[x] == filter_list[y+3]) {
+        /* include it in the output */
+        output_array[x] = input_array[x];
+      }
+      if (input_array[x] == filter_list[y+4]) {
+        /* include it in the output */
+        output_array[x] = input_array[x];
+      }
+      if (input_array[x] == filter_list[y+5]) {
+        /* include it in the output */
+        output_array[x] = input_array[x];
+      }
+      if (input_array[x] == filter_list[y+6]) {
+        /* include it in the output */
+        output_array[x] = input_array[x];
+      }
+      if (input_array[x] == filter_list[y+7]) {
         /* include it in the output */
         output_array[x] = input_array[x];
       }
