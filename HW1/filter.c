@@ -189,40 +189,31 @@ void parallelDataFirstUnrolled ( int data_len, unsigned int* input_array, unsign
   #pragma omp parallel for
   for (int x=0; x<data_len; x++) {
     /* for all elements in the filter */ 
-    for (int y=0; y<filter_len; y+=8) { 
-      /* it the data element matches the filter */ 
+    for (int y=0; y<filter_len; y+=2) {
       if (input_array[x] == filter_list[y]) {
-        /* include it in the output */
         output_array[x] = input_array[x];
       }
       if (input_array[x] == filter_list[y+1]) {
-        /* include it in the output */
         output_array[x] = input_array[x];
       }
-      if (input_array[x] == filter_list[y+2]) {
-        /* include it in the output */
-        output_array[x] = input_array[x];
-      }
-      if (input_array[x] == filter_list[y+3]) {
-        /* include it in the output */
-        output_array[x] = input_array[x];
-      }
-      if (input_array[x] == filter_list[y+4]) {
-        /* include it in the output */
-        output_array[x] = input_array[x];
-      }
-      if (input_array[x] == filter_list[y+5]) {
-        /* include it in the output */
-        output_array[x] = input_array[x];
-      }
-      if (input_array[x] == filter_list[y+6]) {
-        /* include it in the output */
-        output_array[x] = input_array[x];
-      }
-      if (input_array[x] == filter_list[y+7]) {
-        /* include it in the output */
-        output_array[x] = input_array[x];
-      }
+      /* if (input_array[x] == filter_list[y+2]) { */
+      /*   output_array[x] = input_array[x]; */
+      /* } */
+      /* if (input_array[x] == filter_list[y+3]) { */
+      /*   output_array[x] = input_array[x]; */
+      /* } */
+      /* if (input_array[x] == filter_list[y+4]) { */
+      /*   output_array[x] = input_array[x]; */
+      /* } */
+      /* if (input_array[x] == filter_list[y+5]) { */
+      /*   output_array[x] = input_array[x]; */
+      /* } */
+      /* if (input_array[x] == filter_list[y+6]) { */
+      /*   output_array[x] = input_array[x]; */
+      /* } */
+      /* if (input_array[x] == filter_list[y+7]) { */
+      /*   output_array[x] = input_array[x]; */
+      /* } */
     }
   }
 
