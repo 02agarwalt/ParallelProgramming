@@ -189,31 +189,55 @@ void parallelDataFirstUnrolled ( int data_len, unsigned int* input_array, unsign
   #pragma omp parallel for
   for (int x=0; x<data_len; x++) {
     /* for all elements in the filter */ 
-    for (int y=0; y<filter_len; y+=2) {
+    for (int y=0; y<filter_len; y+=16) {
       if (input_array[x] == filter_list[y]) {
         output_array[x] = input_array[x];
       }
       if (input_array[x] == filter_list[y+1]) {
         output_array[x] = input_array[x];
       }
-      /* if (input_array[x] == filter_list[y+2]) { */
-      /*   output_array[x] = input_array[x]; */
-      /* } */
-      /* if (input_array[x] == filter_list[y+3]) { */
-      /*   output_array[x] = input_array[x]; */
-      /* } */
-      /* if (input_array[x] == filter_list[y+4]) { */
-      /*   output_array[x] = input_array[x]; */
-      /* } */
-      /* if (input_array[x] == filter_list[y+5]) { */
-      /*   output_array[x] = input_array[x]; */
-      /* } */
-      /* if (input_array[x] == filter_list[y+6]) { */
-      /*   output_array[x] = input_array[x]; */
-      /* } */
-      /* if (input_array[x] == filter_list[y+7]) { */
-      /*   output_array[x] = input_array[x]; */
-      /* } */
+      if (input_array[x] == filter_list[y+2]) {
+        output_array[x] = input_array[x];
+      }
+      if (input_array[x] == filter_list[y+3]) {
+        output_array[x] = input_array[x];
+      }
+      if (input_array[x] == filter_list[y+4]) {
+        output_array[x] = input_array[x];
+      }
+      if (input_array[x] == filter_list[y+5]) {
+        output_array[x] = input_array[x];
+      }
+      if (input_array[x] == filter_list[y+6]) {
+        output_array[x] = input_array[x];
+      }
+      if (input_array[x] == filter_list[y+7]) {
+        output_array[x] = input_array[x];
+      }
+      if (input_array[x] == filter_list[y+8]) {
+        output_array[x] = input_array[x];
+      }
+      if (input_array[x] == filter_list[y+9]) {
+        output_array[x] = input_array[x];
+      }
+      if (input_array[x] == filter_list[y+10]) {
+        output_array[x] = input_array[x];
+      }
+      if (input_array[x] == filter_list[y+11]) {
+        output_array[x] = input_array[x];
+      }
+      if (input_array[x] == filter_list[y+12]) {
+        output_array[x] = input_array[x];
+      }
+      if (input_array[x] == filter_list[y+13]) {
+        output_array[x] = input_array[x];
+      }
+      if (input_array[x] == filter_list[y+14]) {
+        output_array[x] = input_array[x];
+      }
+      if (input_array[x] == filter_list[y+15]) {
+        output_array[x] = input_array[x];
+      }
     }
   }
 
@@ -354,17 +378,17 @@ int main( int argc, char** argv )
 //    checkData ( serial_array, output_array );
 //    memset ( output_array, 0, DATA_LEN );
 
-//    parallelDataFirstUnrolled ( DATA_LEN, input_array, output_array, filter_len, filter_list );
+    parallelDataFirstUnrolled ( DATA_LEN, input_array, output_array, filter_len, filter_list );
+    checkData ( serial_array, output_array );
+    memset ( output_array, 0, DATA_LEN );
+
+//    parallelDataFirstDynamic ( DATA_LEN, input_array, output_array, filter_len, filter_list );
 //    checkData ( serial_array, output_array );
 //    memset ( output_array, 0, DATA_LEN );
 
-    parallelDataFirstDynamic ( DATA_LEN, input_array, output_array, filter_len, filter_list );
-    checkData ( serial_array, output_array );
-    memset ( output_array, 0, DATA_LEN );
-
-    parallelDataFirstStatic ( DATA_LEN, input_array, output_array, filter_len, filter_list );
-    checkData ( serial_array, output_array );
-    memset ( output_array, 0, DATA_LEN );
+//    parallelDataFirstStatic ( DATA_LEN, input_array, output_array, filter_len, filter_list );
+//    checkData ( serial_array, output_array );
+//    memset ( output_array, 0, DATA_LEN );
   }
 }
 
