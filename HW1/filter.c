@@ -295,7 +295,7 @@ void parallelDataFirstStatic ( int data_len, unsigned int* input_array, unsigned
   gettimeofday ( &ta, NULL );
 
   /* for all elements in the data */
-#pragma omp parallel for schedule(static, 4)
+#pragma omp parallel for schedule(static, 2)
   for (int x=0; x<data_len; x++) {
     /* for all elements in the filter */ 
     for (int y=0; y<filter_len; y++) { 
@@ -378,17 +378,17 @@ int main( int argc, char** argv )
 //    checkData ( serial_array, output_array );
 //    memset ( output_array, 0, DATA_LEN );
 
-    parallelDataFirstUnrolled ( DATA_LEN, input_array, output_array, filter_len, filter_list );
-    checkData ( serial_array, output_array );
-    memset ( output_array, 0, DATA_LEN );
+//    parallelDataFirstUnrolled ( DATA_LEN, input_array, output_array, filter_len, filter_list );
+//    checkData ( serial_array, output_array );
+//    memset ( output_array, 0, DATA_LEN );
 
 //    parallelDataFirstDynamic ( DATA_LEN, input_array, output_array, filter_len, filter_list );
 //    checkData ( serial_array, output_array );
 //    memset ( output_array, 0, DATA_LEN );
 
-//    parallelDataFirstStatic ( DATA_LEN, input_array, output_array, filter_len, filter_list );
-//    checkData ( serial_array, output_array );
-//    memset ( output_array, 0, DATA_LEN );
+    parallelDataFirstStatic ( DATA_LEN, input_array, output_array, filter_len, filter_list );
+    checkData ( serial_array, output_array );
+    memset ( output_array, 0, DATA_LEN );
   }
 }
 
