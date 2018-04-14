@@ -49,9 +49,9 @@ public class FoF {
 	private Text ks = new Text();
 
 	public void map(Object K, Text V, Context c) throws IOException, InterruptedException {
-	    String temp = V.toString();
-	    temp = temp.trim();
-	    String[] items = temp.split("\\s+");
+	    String tmp = V.toString();
+	    tmp = tmp.trim();
+	    String[] items = tmp.split("\\s+");
 	    int k1 = Integer.parseInt(items[0]);
 
 	    for (int i = 1; i < items.length; i++) {
