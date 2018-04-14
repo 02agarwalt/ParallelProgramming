@@ -20,5 +20,6 @@ if __name__ == '__main__':
                 print k[0] + " " + temp1 + " " + temp2
                 print k[1] + " " + temp3 + " " + temp4
                 print k[2] + " " + temp5 + " " + temp6
+                counter = 1
         else:
-            curr = k    
+            curr = k
